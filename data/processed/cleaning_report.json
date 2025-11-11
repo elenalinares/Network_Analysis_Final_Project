@@ -1,0 +1,93 @@
+{
+  "airports_stats": {
+    "raw_airports_rows": 9075,
+    "airport_duplicate_id_rows": 0,
+    "airport_invalid_coord_rows_removed": 0,
+    "cleaned_airports_rows": 9075
+  },
+  "routes_stats": {
+    "raw_routes_rows": 92695,
+    "routes_rows_dropped_missing_ids": 99,
+    "routes_rows_removed_invalid_airport_refs": 90,
+    "routes_self_loops_removed": 4,
+    "cleaned_routes_rows": 92502,
+    "routes_invalid_sample": [
+      {
+        "Airline ID": "AA",
+        "Departure": "KSWO",
+        "Destination": "DFW"
+      },
+      {
+        "Airline ID": "AA",
+        "Departure": "DFW",
+        "Destination": "KSWO"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "LIM",
+        "Destination": "SPJJ"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "SPJJ",
+        "Destination": "LIM"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "SPJB",
+        "Destination": "LIM"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "LIM",
+        "Destination": "SPJB"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "TRU",
+        "Destination": "SPJB"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "SBAE",
+        "Destination": "GRU"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "GRU",
+        "Destination": "SBAE"
+      },
+      {
+        "Airline ID": "LA",
+        "Departure": "SCL",
+        "Destination": "SCRG"
+      }
+    ],
+    "routes_selfloop_sample": [
+      {
+        "Airline ID": "IL",
+        "Departure": "PKN",
+        "Destination": "PKN"
+      },
+      {
+        "Airline ID": "MF",
+        "Departure": "HGH",
+        "Destination": "HGH"
+      },
+      {
+        "Airline ID": "PB",
+        "Departure": "YYT",
+        "Destination": "YYT"
+      },
+      {
+        "Airline ID": "W6",
+        "Departure": "LWO",
+        "Destination": "LWO"
+      }
+    ]
+  },
+  "agg_stats": {
+    "unique_route_pairs": 50168
+  },
+  "generated_at_utc": "2025-11-11T17:16:53.134966+00:00"
+}
