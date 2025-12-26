@@ -2,7 +2,11 @@ import pandas as pd
 import time
 from geopy.geocoders import Nominatim
 
+# -----------------------------
 # load cleaned airports
+# -----------------------------
+
+
 airports = pd.read_csv("data/processed/clean_airports.csv")
 
 geolocator = Nominatim(user_agent="network-analysis-project")

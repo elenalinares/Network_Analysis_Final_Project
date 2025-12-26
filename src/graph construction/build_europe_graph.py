@@ -57,4 +57,3 @@ with open("data/processed/graph_europe.gpickle", "wb") as f:
     pickle.dump(G_europe, f)
 
 print("European graph saved to data/processed/graph_europe.gpickle")
-print(list(G.nodes())[:10])
