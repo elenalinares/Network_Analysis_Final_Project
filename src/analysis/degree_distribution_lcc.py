@@ -10,9 +10,9 @@ FIG_DIR = Path("data/figures")
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------
-# Load European graph
+# Load European UNWEIGHTED graph
 # -----------------------------
-with open("data/processed/graph_europe.gpickle", "rb") as f:
+with open("data/processed/graph_europe_unweighted.gpickle", "rb") as f:
     G_europe = pickle.load(f)
 
 print("European graph loaded")

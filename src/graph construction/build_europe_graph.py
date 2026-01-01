@@ -3,9 +3,9 @@ import pandas as pd
 import networkx as nx
 
 # -----------------------------
-# Load global graph
+# Load global UNWEIGHTED graph
 # -----------------------------
-with open("data/processed/graph_global.gpickle", "rb") as f:
+with open("data/processed/graph_global_unweighted.gpickle", "rb") as f:
     G = pickle.load(f)
 
 print("Global graph loaded")
@@ -17,7 +17,6 @@ print("Global edges:", G.number_of_edges())
 # -----------------------------
 airports = pd.read_csv("data/processed/clean_airports_with_country_std.csv")
 
-# List of European countries
 EUROPE_COUNTRIES = [
     "Portugal", "Spain", "France", "Belgium", "Netherlands",
     "Luxembourg", "Germany", "Switzerland", "Austria",
@@ -53,7 +52,7 @@ print("European graph edges:", G_europe.number_of_edges())
 # -----------------------------
 # Save European graph
 # -----------------------------
-with open("data/processed/graph_europe.gpickle", "wb") as f:
+with open("data/processed/graph_europe_unweighted.gpickle", "wb") as f:
     pickle.dump(G_europe, f)
 
-print("European graph saved to data/processed/graph_europe.gpickle")
+print("European graph saved to data/processed/graph_europe_unweighted.gpickle")

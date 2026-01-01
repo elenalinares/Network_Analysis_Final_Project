@@ -2,54 +2,39 @@ import pickle
 import networkx as nx
 import pandas as pd
 
-
 # -----------------------------
-# Load European graph
+# Load European UNWEIGHTED graph
 # -----------------------------
-with open("data/processed/graph_europe.gpickle", "rb") as f:
+with open("data/processed/graph_europe_unweighted.gpickle", "rb") as f:
     G = pickle.load(f)
 
 print("European graph loaded")
 
-# Load datasets
-routes = pd.read_csv("data/processed/clean_routes.csv")
-airports = pd.read_csv("data/processed/clean_airports_with_country_std.csv")
-
 # -----------------------------
-# size metrics
+# Basic size metrics
 # -----------------------------
 num_nodes = G.number_of_nodes()
 num_edges = G.number_of_edges()
 density = nx.density(G)
 
-# -----------------------------
-# Degree and strength
-# -----------------------------
 degrees = dict(G.degree())
 avg_degree = sum(degrees.values()) / num_nodes
 
-# Weighted degree (strength)
-strengths = dict(G.degree(weight="weight"))
-avg_strength = sum(strengths.values()) / num_nodes
+# -----------------------------
+# Largest Connected Component (LCC)
+# -----------------------------
+G_undirected = G.to_undirected()
+lcc_nodes = max(nx.connected_components(G_undirected), key=len)
+G_lcc = G_undirected.subgraph(lcc_nodes).copy()
+
+lcc_size = G_lcc.number_of_nodes()
+lcc_fraction = 100 * lcc_size / num_nodes
+lcc_avg_degree = sum(dict(G_lcc.degree()).values()) / lcc_size
+lcc_diameter = nx.diameter(G_lcc)
 
 # -----------------------------
-# GCC
-# (weakly connected, since graph is directed)
+# Count total European airline routes
 # -----------------------------
-gcc = max(nx.weakly_connected_components(G), key=len)
-gcc_size = len(gcc)
-
-# -----------------------------
-# Diameter (undirected GCC)
-# -----------------------------
-G_undirected = G.subgraph(gcc).to_undirected()
-diameter = nx.diameter(G_undirected)
-
-
-# -----------------------------
-# Count total European routes (airline level)
-# -----------------------------
-
 routes = pd.read_csv("data/processed/clean_routes.csv")
 airports = pd.read_csv("data/processed/clean_airports_with_country_std.csv")
 
@@ -83,12 +68,14 @@ total_routes_europe = len(routes_europe)
 # -----------------------------
 # Print results
 # -----------------------------
-print("\n--- European Network Statistics ---")
-print(f"Number of nodes: {num_nodes}")
-print(f"Number of edges: {num_edges}")
-print("Total routes (with airlines):", total_routes_europe)
+print("\n--- European Network Statistics (unweighted) ---")
+print("Number of nodes:", num_nodes)
+print("Number of edges:", num_edges)
+print("Total airline routes (edge-level):", total_routes_europe)
 print(f"Density: {density:.5f}")
 print(f"Average degree: {avg_degree:.2f}")
-print(f"Average weighted degree (strength): {avg_strength:.2f}")
-print(f"GCC size: {gcc_size} ({100 * gcc_size / num_nodes:.2f}% of nodes)")
-print(f"Diameter (undirected GCC): {diameter}")
+
+print("\n--- Largest Connected Component (LCC) ---")
+print(f"LCC size: {lcc_size} ({lcc_fraction:.2f}% of nodes)")
+print(f"Average degree (LCC): {lcc_avg_degree:.2f}")
+print(f"Diameter (LCC): {lcc_diameter}")

@@ -1,8 +1,20 @@
 import networkx as nx
 import pickle
 
-with open("data/processed/graph_europe.gpickle", "rb") as f:
+# -----------------------------
+# Load European UNWEIGHTED graph
+# -----------------------------
+with open("data/processed/graph_europe_unweighted.gpickle", "rb") as f:
     G = pickle.load(f)
 
-nx.write_gexf(G, "data/processed/graph_europe.gexf")
-print("Graph exported to graph_europe.gexf")
+print("European unweighted graph loaded")
+print("Nodes:", G.number_of_nodes())
+print("Edges:", G.number_of_edges())
+
+# -----------------------------
+# Export to GEXF for Gephi
+# -----------------------------
+nx.write_gexf(G, "data/processed/graph_europe_unweighted.gexf")
+
+print("Graph exported to data/processed/graph_europe_unweighted.gexf")
+

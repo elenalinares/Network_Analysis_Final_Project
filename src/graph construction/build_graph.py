@@ -1,6 +1,7 @@
 import pandas as pd
 import networkx as nx
 import pickle
+
 # -----------------------------
 # Load cleaned data
 # -----------------------------
@@ -9,20 +10,9 @@ routes = pd.read_csv("data/processed/clean_routes.csv")
 
 print("Clean airports:", len(airports))
 print("Clean routes:", len(routes))
-# -----------------------------
-# create weights
-# -----------------------------
-edges_df = (
-    routes
-    .groupby(["Departure", "Destination"])["Airline ID"]
-    .nunique()
-    .reset_index(name="weight")
-)
-
-print("Unique routes (weighted edges):", len(edges_df))
 
 # -----------------------------
-# Create directed weighted graph
+# Create unweighted graph
 # -----------------------------
 G = nx.DiGraph()
 
@@ -35,12 +25,12 @@ for _, row in airports.iterrows():
         longitude=row["Longitude"]
     )
 
-# Add weighted edges
-for _, row in edges_df.iterrows():
+# Add edges (ONE per airline route)
+for _, row in routes.iterrows():
     G.add_edge(
         row["Departure"],
         row["Destination"],
-        weight=row["weight"]
+        airline_id=row["Airline ID"]
     )
 
 print("Nodes:", G.number_of_nodes())
@@ -49,7 +39,7 @@ print("Edges:", G.number_of_edges())
 # -----------------------------
 # Save graph
 # -----------------------------
-with open("data/processed/graph_global.gpickle", "wb") as f:
+with open("data/processed/graph_global_unweighted.gpickle", "wb") as f:
     pickle.dump(G, f)
 
-print("Weighted global graph saved")
+print("Unweighted global graph saved")

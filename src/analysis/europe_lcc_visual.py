@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import math
 
 # -----------------------------
-# Load European graph
+# Load European UNWEIGHTED graph
 # -----------------------------
-with open("data/processed/graph_europe.gpickle", "rb") as f:
+with open("data/processed/graph_europe_unweighted.gpickle", "rb") as f:
     G = pickle.load(f)
 
 print("European graph loaded")
@@ -24,7 +24,7 @@ print("LCC nodes:", G_lcc.number_of_nodes())
 print("LCC edges:", G_lcc.number_of_edges())
 
 # -----------------------------
-# Node sizes (degree-based, smooth)
+# Node sizes (degree-based)
 # -----------------------------
 degrees = dict(G_lcc.degree())
 node_sizes = [math.sqrt(degrees[n]) * 15 for n in G_lcc.nodes()]
@@ -44,7 +44,6 @@ pos = nx.spring_layout(
 # -----------------------------
 plt.figure(figsize=(12, 12))
 
-# Edges (thicker)
 nx.draw_networkx_edges(
     G_lcc,
     pos,
@@ -53,7 +52,6 @@ nx.draw_networkx_edges(
     width=1.2
 )
 
-# Nodes (with black border)
 nx.draw_networkx_nodes(
     G_lcc,
     pos,
@@ -64,7 +62,7 @@ nx.draw_networkx_nodes(
     alpha=0.9
 )
 
-plt.title("LCC Europe Subgraph", fontsize=14)
+plt.title("Largest Connected Component of the European Air Transport Network", fontsize=14)
 plt.axis("off")
 plt.tight_layout()
 
