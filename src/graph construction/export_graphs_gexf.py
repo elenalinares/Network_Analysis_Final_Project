@@ -1,3 +1,5 @@
+#silly code to get a visualilzation on gephi
+
 import networkx as nx
 import pickle
 

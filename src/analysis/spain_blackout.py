@@ -1,3 +1,8 @@
+#this code is for the research question, so really important
+#we are simulating a countr-wide aiport shutdown by removing all airports from a country -- Spain in this case
+#then we measure the changes in connectivity and robustness to compare them before and after
+
+
 import pickle
 import networkx as nx
 import pandas as pd
@@ -43,7 +48,7 @@ def compute_stats(G):
     }
 
 # -----------------------------
-# Baseline statistics
+# Baseline stats
 # -----------------------------
 baseline_stats = compute_stats(G)
 
@@ -74,7 +79,7 @@ print("Nodes:", G_spain_blackout.number_of_nodes())
 print("Edges:", G_spain_blackout.number_of_edges())
 
 # -----------------------------
-# Statistics after shutdown
+# Stats after shutdown
 # -----------------------------
 after_stats = compute_stats(G_spain_blackout)
 

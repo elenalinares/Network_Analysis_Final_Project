@@ -1,3 +1,6 @@
+#basic properties for the eurpoean air transport network + LCC
+#we get a baseline to evaluate large-scale disruptios --> research question
+
 import pickle
 import networkx as nx
 import pandas as pd
@@ -11,7 +14,7 @@ with open("data/processed/graph_europe_unweighted.gpickle", "rb") as f:
 print("European graph loaded")
 
 # -----------------------------
-# Basic size metrics
+# Basics
 # -----------------------------
 num_nodes = G.number_of_nodes()
 num_edges = G.number_of_edges()
@@ -21,7 +24,7 @@ degrees = dict(G.degree())
 avg_degree = sum(degrees.values()) / num_nodes
 
 # -----------------------------
-# Largest Connected Component (LCC)
+# LCC stuff
 # -----------------------------
 G_undirected = G.to_undirected()
 lcc_nodes = max(nx.connected_components(G_undirected), key=len)

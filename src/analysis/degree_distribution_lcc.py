@@ -1,10 +1,10 @@
-import pickle
-import networkx as nx
-import matplotlib.pyplot as plt
-from pathlib import Path
+import pickle #para descargar fotos
+import networkx as nx #báisca, para network analysis
+import matplotlib.pyplot as plt #graphs
+from pathlib import Path #file routes
 
 # -----------------------------
-# Paths
+# Paths - create a folder
 # -----------------------------
 FIG_DIR = Path("data/figures")
 FIG_DIR.mkdir(parents=True, exist_ok=True)
@@ -13,14 +13,14 @@ FIG_DIR.mkdir(parents=True, exist_ok=True)
 # Load European UNWEIGHTED graph
 # -----------------------------
 with open("data/processed/graph_europe_unweighted.gpickle", "rb") as f:
-    G_europe = pickle.load(f)
+    G_europe = pickle.load(f) #basic af graph loading
 
 print("European graph loaded")
 print("Nodes:", G_europe.number_of_nodes())
 print("Edges:", G_europe.number_of_edges())
 
 # -----------------------------
-# Extract Largest Connected Component (LCC)
+# Extract Largest Connected Component (LCC)  --  basic info
 # -----------------------------
 G_undirected = G_europe.to_undirected()
 lcc_nodes = max(nx.connected_components(G_undirected), key=len)
@@ -30,14 +30,11 @@ print("LCC nodes:", G_lcc.number_of_nodes())
 print("LCC edges:", G_lcc.number_of_edges())
 
 # -----------------------------
-# Degree distribution
+# Degree distribution + ploting it
 # -----------------------------
 degrees = [d for _, d in G_lcc.degree()]
 avg_degree = sum(degrees) / len(degrees)
 
-# -----------------------------
-# Plot degree distribution
-# -----------------------------
 plt.figure(figsize=(8, 5))
 
 plt.hist(

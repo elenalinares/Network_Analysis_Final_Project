@@ -1,3 +1,8 @@
+#really important code -
+#it builds the global unweighted air trasport network
+#airports = nodes
+#airlines = directed edges
+
 import pandas as pd
 import networkx as nx
 import pickle
