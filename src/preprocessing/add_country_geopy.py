@@ -1,3 +1,6 @@
+#this scritp assigns a country to each aiport by reverse geocoding its latitude and longitude using the geopy library
+#nothing too weird here - just the libary that's crazy
+
 import pandas as pd
 import time
 from geopy.geocoders import Nominatim

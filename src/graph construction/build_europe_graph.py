@@ -1,3 +1,6 @@
+#very basic code to select JUST european airports -- nice and simple
+#it extracts the european air transport network from the global network by selectin ariports based on country information
+
 import pickle
 import pandas as pd
 import networkx as nx

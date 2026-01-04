@@ -1,3 +1,5 @@
+#just some nice a silly data cleaning - ensure consistency between aiports and routes before building the network
+
 import pandas as pd
 from pathlib import Path
 

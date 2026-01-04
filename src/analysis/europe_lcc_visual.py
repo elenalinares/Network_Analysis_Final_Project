@@ -1,3 +1,7 @@
+#this code creates a visualilzation of the largest connecected components of the European iar trasport network. 
+#node size = airport connectivity
+
+
 import pickle
 import networkx as nx
 import matplotlib.pyplot as plt
